@@ -11,18 +11,40 @@ namespace FileKezelo
   {
     static void Main(string[] args)
     {
-      string fileName = "text.txt"; 
+      string fileName = "21esBusz.txt"; 
       try
       {
         var myFile = new MyFile(fileName);
       }
-      catch(IOException ioEx)
+      catch (NullReferenceException ex)
+      {
+        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
+        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
+        Console.ReadKey();
+        Console.WriteLine($"bocs valami rosszul ment: \n {ex}");
+      }
+      catch (ObjectDisposedException dispEx)
+      {
+        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
+        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
+        Console.ReadKey();
+        Console.WriteLine($"bocs valami rosszul ment: \n {dispEx}");
+      }
+      catch (IOException ioEx)
       {
 
         Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
         Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
         Console.ReadKey();
         Console.WriteLine($"bocs valami rosszul ment: \n {ioEx}");
+      }
+      catch (Exception ex)
+      {
+
+        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
+        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
+        Console.ReadKey();
+        Console.WriteLine($"bocs valami rosszul ment: \n {ex}");
       }
       finally
       {

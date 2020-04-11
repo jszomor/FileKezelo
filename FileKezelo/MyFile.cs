@@ -17,9 +17,38 @@ namespace FileKezelo
     {
       try
       {
-        StreamFile = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite);
-        FileReader = new StreamReader(StreamFile);
-        FileWriter = new StreamWriter(StreamFile);
+        //using (StreamFile = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite))
+        //{
+        //  FileReader = new StreamReader(StreamFile);
+        //  FileWriter = new StreamWriter(StreamFile);
+        //}
+        string sor;
+        string[] adatok;
+        string[] minden = File.ReadAllLines(fileName);
+        if((sor = FileReader.ReadLine()) != null)
+        {
+          //adatok = sor.Split('\t');
+          //if (adatok.Length != 3) continue;
+          //Console.WriteLine(minden);
+          for (int i = 0; i < minden.Length; i++)
+          {
+            Console.WriteLine(minden[i]);
+          }
+        }
+      }
+      catch(ObjectDisposedException dispEx)
+      {
+        string customMessage = "ObjectDisposedException";
+        int errorCode = dispEx.HResult;
+        ErrorHandler.PutError(customMessage, errorCode);
+        throw new ObjectDisposedException($"message:{customMessage}, \n errorcode:{errorCode}");
+      }
+      catch(NullReferenceException ex)
+      {
+        string customMessage = "NullReferenceException";
+        int errorCode = ex.HResult;
+        ErrorHandler.PutError(customMessage, errorCode);
+        throw new NullReferenceException($"message:{customMessage}, \n errorcode:{errorCode}");
       }
       catch(IOException e)
       {
@@ -27,6 +56,13 @@ namespace FileKezelo
         int errorCode = e.HResult;
         ErrorHandler.PutError(customMessage, errorCode);
         throw new IOException($"message:{customMessage}, \n errorcode:{errorCode}");
+      }
+      catch(Exception ex)
+      {
+        string customMessage = "Genaral Error";
+        int errorCode = ex.HResult;
+        ErrorHandler.PutError(customMessage, errorCode);
+        throw new ObjectDisposedException($"message:{customMessage}, \n errorcode:{errorCode}");
       }
     }
   }
