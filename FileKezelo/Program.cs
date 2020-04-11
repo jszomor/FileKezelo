@@ -18,6 +18,10 @@ namespace FileKezelo
       }
       catch(IOException ioEx)
       {
+
+        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
+        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
+        Console.ReadKey();
         Console.WriteLine($"bocs valami rosszul ment: \n {ioEx}");
       }
       finally

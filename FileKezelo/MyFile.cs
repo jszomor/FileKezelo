@@ -42,9 +42,6 @@ namespace FileKezelo
       //értéket ír a 3 property be
       ErrorCode = errorCode;
       CustomMessage = customMessage;
-      Console.WriteLine("ErrorCode: {0}",ErrorCode);
-      Console.WriteLine("Message: {0}", CustomMessage);
-      Console.ReadKey();
     }
     public static void GetError()
     {
