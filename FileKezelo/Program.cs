@@ -9,46 +9,26 @@ namespace FileKezelo
 {
   class Program
   {
+    static void FirstErrHandlerFn(string customMessage, int errorCode, RiskLevels RiskLevel)
+    {
+      Console.WriteLine(customMessage);
+    }
     static void Main(string[] args)
     {
-      string fileName = "21esBusz.txt"; 
-      try
+      string fileName = "21esBusz22.txt";      
+      var myFile = new MyFile();
+      string customMessage;
+      int errorCode;
+      ErrorHandler.myErrHandlerFn = FirstErrHandlerFn;
+      RiskLevels levels;
+      if (myFile.FileOlvaso(fileName) == false)
       {
-        var myFile = new MyFile(fileName);
+        ErrorHandler.GetError(out customMessage, out errorCode, out levels);
+        Console.WriteLine("customMessage:{0} \n errorCode:{1} \n levels:{2}", customMessage, errorCode, levels);
       }
-      catch (NullReferenceException ex)
-      {
-        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
-        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
-        Console.ReadKey();
-        Console.WriteLine($"bocs valami rosszul ment: \n {ex}");
-      }
-      catch (ObjectDisposedException dispEx)
-      {
-        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
-        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
-        Console.ReadKey();
-        Console.WriteLine($"bocs valami rosszul ment: \n {dispEx}");
-      }
-      catch (IOException ioEx)
+      else
       {
 
-        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
-        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
-        Console.ReadKey();
-        Console.WriteLine($"bocs valami rosszul ment: \n {ioEx}");
-      }
-      catch (Exception ex)
-      {
-
-        Console.WriteLine("ErrorCode: {0}", ErrorHandler.ErrorCode);
-        Console.WriteLine("Message: {0}", ErrorHandler.CustomMessage);
-        Console.ReadKey();
-        Console.WriteLine($"bocs valami rosszul ment: \n {ex}");
-      }
-      finally
-      {
-        Console.WriteLine("Program vége");
       }
       Console.ReadKey();   
     }
