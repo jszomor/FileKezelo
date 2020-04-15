@@ -9,33 +9,30 @@ namespace FileKezelo
 {
   public class MyFile
   {
-    StreamReader FileReader;
-    StreamWriter FileWriter;
-    FileStream StreamFile;
-
     public bool FileOlvaso(string fileName)
     {
       try
       {
-        //StreamFile = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite);        
-        //FileReader = new StreamReader(StreamFile);
-        //FileWriter = new StreamWriter(StreamFile);
-        
-        //string sor;
-        //string[] adatok;
-        string[] minden = File.ReadAllLines(fileName);
-        //if((sor = FileReader.ReadLine()) != null)
+        string newFile = "ujFile.txt";
+        Encoding e = Encoding.GetEncoding(1250);
+        FileStream openFile = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite);
+        string beolvasottSor;
+        string ujsor;
+        string rendelet;
+        using (StreamReader fileToRead = new StreamReader(openFile, e))
         {
-          //adatok = sor.Split('\t');
-          //if (adatok.Length != 3) continue;
-          //Console.WriteLine(minden);
-          for (int i = 0; i < minden.Length; i++)
+          StreamWriter fileToWrite = new StreamWriter(newFile, true, e);
+
+          while ((beolvasottSor = fileToRead.ReadLine()) != null)
           {
-            Console.WriteLine(minden[i]);
+            rendelet = beolvasottSor.Replace("utca", "park");
+            ujsor = rendelet;
+            fileToWrite.WriteLine(ujsor);
           }
+          fileToWrite.Close();
         }
         return true;
-      }
+      }      
       catch(Exception ex)
       {
         string customMessage = "General Error";

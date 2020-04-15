@@ -15,7 +15,7 @@ namespace FileKezelo
     }
     static void Main(string[] args)
     {
-      string fileName = "21esBusz22.txt";      
+      string fileName = "21esBusz.txt";      
       var myFile = new MyFile();
       string customMessage;
       int errorCode;
