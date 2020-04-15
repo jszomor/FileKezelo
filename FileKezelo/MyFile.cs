@@ -18,15 +18,13 @@ namespace FileKezelo
         FileStream openFile = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite);
         string beolvasottSor;
         string ujsor;
-        string rendelet;
         using (StreamReader fileToRead = new StreamReader(openFile, e))
         {
-          StreamWriter fileToWrite = new StreamWriter(newFile, true, e);
+          StreamWriter fileToWrite = new StreamWriter(newFile, false, e);
 
           while ((beolvasottSor = fileToRead.ReadLine()) != null)
           {
-            rendelet = beolvasottSor.Replace("utca", "park");
-            ujsor = rendelet;
+            ujsor = beolvasottSor.Replace("utca", "park");
             fileToWrite.WriteLine(ujsor);
           }
           fileToWrite.Close();
